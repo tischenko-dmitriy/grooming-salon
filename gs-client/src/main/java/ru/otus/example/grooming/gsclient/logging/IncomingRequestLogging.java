@@ -55,7 +55,7 @@ public class IncomingRequestLogging implements Filter {
                                 "?" + contentCachingRequestWrapper.getQueryString() : "");
 
         String requestBody =
-                new String(contentCachingRequestWrapper.getParameter("data").getBytes(), StandardCharsets.UTF_8);
+                new String(contentCachingRequestWrapper.getContentAsByteArray(), StandardCharsets.UTF_8);
         String responseBody =
                 new String(contentCachingResponseWrapper.getContentAsByteArray(), StandardCharsets.UTF_8);
 
