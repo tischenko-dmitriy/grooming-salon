@@ -7,3 +7,5 @@
 /.idea/compiler.xml
 /.idea/encodings.xml
 /.idea/uiDesigner.xml
+/gs-client/target/
+/execution/
