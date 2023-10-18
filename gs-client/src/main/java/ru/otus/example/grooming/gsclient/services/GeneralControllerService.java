@@ -6,11 +6,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GeneralControllerService {
+
+    private final ApplicationContext applicationContext;
+
+    @Autowired
+    public GeneralControllerService(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     public String testApplication() throws JsonProcessingException{
         return new ObjectMapper()
