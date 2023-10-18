@@ -42,6 +42,17 @@ create table tb_clients (
 /* **************************************************************************
  *  
  */
+create table tb_client_adresses (
+    id_ bigserial not null primary key,
+    client_id_ integer not null,
+    address_ varchar(255),
+    foreign key (client_id_) references tb_clients(id_)
+);
+
+
+/* **************************************************************************
+ *  
+ */
 create table tb_pet_kinds (
     id_ bigserial not null primary key,
     name_ varchar(128)
