@@ -20,4 +20,13 @@ public class ApiExceptionHandler {
         return new SuccessWithError(false, new Error(code, type, message));
     }
 
+    @ExceptionHandler(CrudOperationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public SuccessWithError handleCrudOperationException(CrudOperationException e) {
+        int code = 50001;
+        String type = "DATABASE_OPERATION_ERROR";
+        String message = String.format("[%s] - %s", e.getClassName(), e.getMessage());
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
 }
