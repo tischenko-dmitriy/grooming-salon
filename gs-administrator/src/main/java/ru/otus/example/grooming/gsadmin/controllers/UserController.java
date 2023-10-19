@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.example.grooming.gsadmin.model.dto.SimpleDto;
+import ru.otus.example.grooming.gsadmin.model.dto.UserDto;
 import ru.otus.example.grooming.gsadmin.model.results.Success;
 import ru.otus.example.grooming.gsadmin.services.UserControllerService;
 
@@ -34,5 +35,13 @@ public class UserController {
     public ResponseEntity<SimpleDto> getUserRoles() throws JsonProcessingException {
         SimpleDto result = userControllerService.getUserRoles();
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/create",
+            consumes = "application/json; charset=utf-8",
+            produces = "application/json; charset=utf-8")
+    public ResponseEntity<Success> createUser(@RequestBody UserDto userData) {
+        userControllerService.createUser(userData);
+        return new ResponseEntity<>(new Success(true), HttpStatus.OK);
     }
 }

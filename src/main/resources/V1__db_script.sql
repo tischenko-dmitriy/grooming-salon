@@ -21,10 +21,9 @@ create table tb_users (
     user_role_id_ int not null,
     login_ varchar(64) not null unique,
     password_ varchar(255) not null,
-    disabled_ boolean default false,
+    enabled_ boolean default true not null,
     foreign key (user_role_id_) references tb_user_roles(id_)
 );
-
 
 /* **************************************************************************
  *  
