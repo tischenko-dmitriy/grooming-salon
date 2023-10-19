@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.otus.example.grooming.gsclient.model.dto.SimpleDto;
 import ru.otus.example.grooming.gsclient.services.UserControllerService;
 
+import java.net.URISyntaxException;
+
 @RestController
 @RequestMapping(value = "/grooming/client/user")
 public class UserController {
@@ -22,7 +24,7 @@ public class UserController {
     @GetMapping(value = "/role/list",
         produces = "application/json; charset = UTF-8")
     @ResponseBody
-    public ResponseEntity<SimpleDto> getUserRoles() {
+    public ResponseEntity<SimpleDto> getUserRoles() throws URISyntaxException {
         SimpleDto result = userControllerService.getUserRoleList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

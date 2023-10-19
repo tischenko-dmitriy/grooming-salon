@@ -50,7 +50,11 @@ public class UserControllerService {
     }
 
     public void createUser(UserDto userData) {
-        userRepository.save(toUser(userData));
+        try {
+            userRepository.save(toUser(userData));
+        } catch (Exception e) {
+            throw new CrudOperationException(e.getClass().getName(), e.getMessage());
+        }
     }
 
     private UserEntity toUser(UserDto userData) {

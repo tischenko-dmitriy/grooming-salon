@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.otus.example.grooming.gsadmin.model.results.SuccessWithError;
 import ru.otus.example.grooming.gsadmin.model.Error;
 
+import java.net.URISyntaxException;
+
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
@@ -15,6 +17,15 @@ public class ApiExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public SuccessWithError handleJsonProcessingException(JsonProcessingException e) {
         int code = 40001;
+        String type = "REQUEST_ERROR";
+        String message = e.getMessage();
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
+    @ExceptionHandler(URISyntaxException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public SuccessWithError handleURISyntaxException(URISyntaxException e) {
+        int code = 40002;
         String type = "REQUEST_ERROR";
         String message = e.getMessage();
         return new SuccessWithError(false, new Error(code, type, message));
