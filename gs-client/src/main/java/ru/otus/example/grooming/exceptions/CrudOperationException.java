@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.exceptions;
+package ru.otus.example.grooming.exceptions;
 
 import lombok.Getter;
 

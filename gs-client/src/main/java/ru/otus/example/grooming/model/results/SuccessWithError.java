@@ -1,6 +1,6 @@
-package ru.otus.example.grooming.gsclient.model.results;
+package ru.otus.example.grooming.model.results;
 
-import ru.otus.example.grooming.gsclient.model.Error;
+import ru.otus.example.grooming.model.Error;
 
 public class SuccessWithError extends Success {
 

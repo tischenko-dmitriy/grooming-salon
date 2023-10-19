@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.logging;
+package ru.otus.example.grooming.logging;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

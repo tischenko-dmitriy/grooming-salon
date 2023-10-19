@@ -1,12 +1,12 @@
-package ru.otus.example.grooming.gsclient.exceptions;
+package ru.otus.example.grooming.exceptions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.otus.example.grooming.gsclient.model.results.SuccessWithError;
-import ru.otus.example.grooming.gsclient.model.Error;
+import ru.otus.example.grooming.model.results.SuccessWithError;
+import ru.otus.example.grooming.model.Error;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {

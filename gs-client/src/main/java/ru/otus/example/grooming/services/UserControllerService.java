@@ -1,10 +1,10 @@
-package ru.otus.example.grooming.gsclient.services;
+package ru.otus.example.grooming.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.otus.example.grooming.gsclient.entities.UserRoleEntity;
-import ru.otus.example.grooming.gsclient.exceptions.CrudOperationException;
-import ru.otus.example.grooming.gsclient.repositories.UserRoleRepository;
+import ru.otus.example.grooming.entities.UserRoleEntity;
+import ru.otus.example.grooming.exceptions.CrudOperationException;
+import ru.otus.example.grooming.repositories.UserRoleRepository;
 
 @Service
 public class UserControllerService {

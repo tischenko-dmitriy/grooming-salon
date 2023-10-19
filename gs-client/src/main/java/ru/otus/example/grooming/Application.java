@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient;
+package ru.otus.example.grooming;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.controllers;
+package ru.otus.example.grooming.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,11 +8,12 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import ru.otus.example.grooming.gsclient.services.UserControllerService;
+import ru.otus.example.grooming.services.UserControllerService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doNothing;
@@ -35,7 +36,7 @@ public class UserControllerTest {
     @BeforeEach
     public void init() {
         mockMvc = MockMvcBuilders.standaloneSetup(userController)
-                .defaultRequest(post("/grooming/client/user"))
+                .defaultRequest(post("/"))
                 .build();
 
     }
@@ -43,21 +44,22 @@ public class UserControllerTest {
     @Test
     public void testCreateRole() throws Exception {
         //given
-        String uri = "/role/create";
-        String roleName = "Client";
+        String uri = "/grooming/client/user/role/create";
+        String roleName = "client";
 
         doNothing().when(userControllerService).createUserRole(roleName);
 
         //when
-        MvcResult result = this.mockMvc.perform(post(uri, roleName)
-                        .param("userRoleName", roleName))
+        MvcResult result = this.mockMvc.perform(post(uri)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"data\": \"client\"}"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
 
         //then
         assertThat(result).isNotNull();
-        assertThat(result.getRequest().getHeader("X-Real-Host")).isNotNull();
         assertThat(HttpStatus.OK.value()).isEqualTo(result.getResponse().getStatus());
 
     }

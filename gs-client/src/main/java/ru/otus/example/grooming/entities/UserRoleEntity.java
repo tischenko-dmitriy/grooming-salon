@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.entities;
+package ru.otus.example.grooming.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

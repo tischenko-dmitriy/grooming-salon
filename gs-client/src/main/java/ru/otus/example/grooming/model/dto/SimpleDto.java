@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.model.dto;
+package ru.otus.example.grooming.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

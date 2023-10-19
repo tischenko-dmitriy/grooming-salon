@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.controllers;
+package ru.otus.example.grooming.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.otus.example.grooming.gsclient.model.dto.SimpleDto;
-import ru.otus.example.grooming.gsclient.model.results.Success;
-import ru.otus.example.grooming.gsclient.services.UserControllerService;
+import ru.otus.example.grooming.model.dto.SimpleDto;
+import ru.otus.example.grooming.model.results.Success;
+import ru.otus.example.grooming.services.UserControllerService;
 
 @RestController
 @RequestMapping(value = "/grooming/client/user")

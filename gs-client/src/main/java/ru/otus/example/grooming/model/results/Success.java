@@ -1,4 +1,4 @@
-package ru.otus.example.grooming.gsclient.model.results;
+package ru.otus.example.grooming.model.results;
 
 public class Success {
     private boolean success;
