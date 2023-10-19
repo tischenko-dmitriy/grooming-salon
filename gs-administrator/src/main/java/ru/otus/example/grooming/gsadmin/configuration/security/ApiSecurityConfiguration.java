@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.otus.example.grooming.gsadmin.services.ApiUserDetailService;
 
-
 @Configuration
 @EnableWebSecurity
 public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -33,7 +32,7 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .antMatcher("/edogovor/**")
+                .antMatcher("/grooming/**")
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and().httpBasic().authenticationEntryPoint(apiAuthenticationEntryPoint)

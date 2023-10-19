@@ -4,7 +4,8 @@
  */
 create table tb_user_roles (
     id_ bigserial not null primary key,
-    name_ varchar(32)
+    name_ varchar(32),
+    is_admin_ bool default false not null 
 );
 
 insert into tb_user_roles (name_) values ('Клиент');
