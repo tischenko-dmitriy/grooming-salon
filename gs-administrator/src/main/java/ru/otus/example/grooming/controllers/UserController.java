@@ -12,7 +12,7 @@ import ru.otus.example.grooming.model.results.Success;
 import ru.otus.example.grooming.services.UserControllerService;
 
 @RestController
-@RequestMapping(value = "/grooming/client/user")
+@RequestMapping(value = "/grooming/admin/user")
 public class UserController {
 
     private final UserControllerService userControllerService;

@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import ru.otus.example.grooming.services.UserControllerService;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +43,7 @@ public class UserControllerTest {
     @Test
     public void testCreateRole() throws Exception {
         //given
-        String uri = "/grooming/client/user/role/create";
+        String uri = "/grooming/admin/user/role/create";
         String roleName = "client";
 
         doNothing().when(userControllerService).createUserRole(roleName);
