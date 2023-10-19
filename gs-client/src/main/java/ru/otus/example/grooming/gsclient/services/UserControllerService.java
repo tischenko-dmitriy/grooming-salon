@@ -6,6 +6,7 @@ import ru.otus.example.grooming.gsclient.model.dto.SimpleDto;
 @Service
 public class UserControllerService {
 
+
     public SimpleDto getUserRoleList() {
 
         return new SimpleDto();
