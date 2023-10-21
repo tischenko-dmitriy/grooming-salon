@@ -24,10 +24,9 @@ public class UserControllerService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserControllerService(BCryptPasswordEncoder bCryptPasswordEncoder,
-                                 UserRoleRepository userRoleRepository,
+    public UserControllerService(UserRoleRepository userRoleRepository,
                                  UserRepository userRepository) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.userRoleRepository = userRoleRepository;
         this.userRepository = userRepository;
     }

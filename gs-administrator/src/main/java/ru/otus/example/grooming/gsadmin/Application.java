@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "ru.otus.example.grooming.gsclient")
+@ComponentScan(basePackages = "ru.otus.example.grooming.gsadmin")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class);

@@ -1,6 +1,7 @@
 package ru.otus.example.grooming.gsadmin.services;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,8 @@ public class GeneralControllerService {
     @Setter
     @AllArgsConstructor
     private static class AppInfo {
+
+        @JsonProperty(value = "appName")
         private String appName;
     }
 
