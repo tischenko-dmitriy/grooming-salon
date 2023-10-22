@@ -10,6 +10,8 @@ import ru.otus.example.grooming.gsadmin.model.dto.UserDto;
 import ru.otus.example.grooming.gsadmin.model.results.Success;
 import ru.otus.example.grooming.gsadmin.services.UserControllerService;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "/grooming/admin/user")
 public class UserController {
@@ -32,9 +34,8 @@ public class UserController {
     @GetMapping(value = "/role/list",
         produces = "application/json; charset = UTF-8")
     @ResponseBody
-    public ResponseEntity<SimpleDto> getUserRoles() throws JsonProcessingException {
-        SimpleDto result = userControllerService.getUserRoles();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<String> getUserRoles() throws IOException {
+        return new ResponseEntity<>(userControllerService.getUserRoles(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/create",

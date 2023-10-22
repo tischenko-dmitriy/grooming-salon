@@ -24,8 +24,8 @@ public class UserController {
     @GetMapping(value = "/role/list",
         produces = "application/json; charset = UTF-8")
     @ResponseBody
-    public ResponseEntity<SimpleDto> getUserRoles() throws URISyntaxException {
-        SimpleDto result = userControllerService.getUserRoleList();
+    public ResponseEntity<String> getUserRoles() throws URISyntaxException {
+        String result = userControllerService.getUserRoleList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

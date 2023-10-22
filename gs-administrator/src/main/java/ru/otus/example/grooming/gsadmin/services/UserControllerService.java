@@ -14,6 +14,8 @@ import ru.otus.example.grooming.gsadmin.model.dto.UserDto;
 import ru.otus.example.grooming.gsadmin.repositories.UserRepository;
 import ru.otus.example.grooming.gsadmin.repositories.UserRoleRepository;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 
 @Service
@@ -39,13 +41,15 @@ public class UserControllerService {
         }
     }
 
-    public SimpleDto getUserRoles() throws JsonProcessingException {
+    public String getUserRoles() throws IOException {
         List<UserRoleEntity> userRoles = (List<UserRoleEntity>) userRoleRepository.findAll();
-        String data = new ObjectMapper()
-                .writerFor(userRoles.getClass())
-                .writeValueAsString(userRoles);
 
-        return new SimpleDto(data);
+        StringWriter writer = new StringWriter();
+        new ObjectMapper()
+                .writerFor(userRoles.getClass())
+                .writeValue(writer, userRoles);
+
+        return writer.toString();
     }
 
     public void createUser(UserDto userData) {
