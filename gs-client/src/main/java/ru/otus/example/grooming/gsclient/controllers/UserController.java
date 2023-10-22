@@ -27,6 +27,7 @@ public class UserController {
     public ResponseEntity<String> getUserRoles() throws URISyntaxException {
         String result = userControllerService.getUserRoleList();
         return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
 
 }
