@@ -2,10 +2,7 @@ package ru.otus.example.grooming.gsclient.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.otus.example.grooming.gsclient.model.dto.SimpleDto;
@@ -38,9 +35,10 @@ public class UserControllerService {
         String authorization = String.format("%s:%s", adminUsername, adminPassword);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + new String(Base64.getEncoder().encode(authorization.getBytes())));
-        RequestEntity<Void> request = new RequestEntity<>(headers, HttpMethod.GET, new URI(uri));
-        ResponseEntity<String> response = restTemplate. getForEntity(new URI(uri), String.class);
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(new URI(uri), HttpMethod.GET, request, String.class);
         return response.getBody();
+
     }
 
 }
