@@ -46,6 +46,7 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated()
+                .and().cors()
                 .and().httpBasic().authenticationEntryPoint(apiAuthenticationEntryPoint)
                 .and().sessionManagement().disable();
     }
@@ -55,15 +56,17 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+/*
     @Bean
-    public SecurityFilterChain configureFilterChain(HttpSecurity httpSecurity) throws Exception {
+    SecurityFilterChain configureFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .cors(Customizer.withDefaults());
         return httpSecurity.build();
     }
+*/
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource(@Value("${security.allowed-origins}") String allowedOrigins) {
+    CorsConfigurationSource corsConfigurationSource(@Value("${security.allowed-origins}") String allowedOrigins) {
         List<String> origins = Stream.of(allowedOrigins.split(",")).toList();
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(origins);
