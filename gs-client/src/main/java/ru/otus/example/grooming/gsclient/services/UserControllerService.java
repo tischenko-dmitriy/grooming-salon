@@ -6,13 +6,10 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.otus.example.grooming.gsclient.model.dto.ClientDto;
-import ru.otus.example.grooming.gsclient.model.dto.SimpleDto;
 import ru.otus.example.grooming.gsclient.model.dto.UserDto;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Base64;
-import java.util.Locale;
 import java.util.Properties;
 
 @Service

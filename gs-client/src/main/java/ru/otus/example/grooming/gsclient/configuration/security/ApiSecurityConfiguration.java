@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import ru.otus.example.grooming.gsclient.services.ApiUserDetailService;
 
 @Configuration
@@ -36,6 +35,7 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatcher("/grooming/client/**")
                 .authorizeRequests()
                 .anyRequest().authenticated()
+                .and().cors()
                 .and().httpBasic().authenticationEntryPoint(apiAuthenticationEntryPoint)
                 .and().sessionManagement().disable();
     }
@@ -43,12 +43,6 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain configureFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors();
-        return httpSecurity.build();
     }
 
 }

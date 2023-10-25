@@ -17,7 +17,6 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_")
-    @NonNull
     private Long id;
 
     @Column(name = "user_id_")
