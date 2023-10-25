@@ -23,8 +23,8 @@ public class UserController {
     @GetMapping(value = "/role/list",
         produces = "application/json; charset = UTF-8")
     @ResponseBody
-    public ResponseEntity<String> getUserRoles() throws URISyntaxException {
-        String result = userControllerService.getUserRoleList();
+    public ResponseEntity<String> getUserRoles(HttpServletRequest httpServletRequest) throws URISyntaxException {
+        String result = userControllerService.getUserRoleList(httpServletRequest.getHeader("Authorization"));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

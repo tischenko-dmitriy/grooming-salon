@@ -38,11 +38,10 @@ public class UserControllerService {
         this.restTemplate = new RestTemplate();
     }
 
-    public String getUserRoleList() throws URISyntaxException {
+    public String getUserRoleList(String authorization) throws URISyntaxException {
         String uri = String.format("%s%s", adminAppUrl, getUserRoleListUri);
-        String authorization = String.format("%s:%s", adminUsername, adminPassword);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + new String(Base64.getEncoder().encode(authorization.getBytes())));
+        headers.add("Authorization", authorization);
         HttpEntity<Void> request = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(new URI(uri), HttpMethod.GET, request, String.class);
         return response.getBody();
