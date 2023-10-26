@@ -16,8 +16,8 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public void createClient(Long userId) {
-        ClientEntity clientEntity = new ClientEntity(userId);
+    public void createClient(Long userId, String name) {
+        ClientEntity clientEntity = new ClientEntity(userId, name, "+70000000000");
         clientRepository.save(clientEntity);
     }
 

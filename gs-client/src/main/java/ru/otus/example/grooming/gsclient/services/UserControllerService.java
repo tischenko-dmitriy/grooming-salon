@@ -1,5 +1,6 @@
 package ru.otus.example.grooming.gsclient.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.otus.example.grooming.gsclient.model.dto.ClientDto;
 import ru.otus.example.grooming.gsclient.model.dto.UserDto;
+import ru.otus.example.grooming.gsclient.model.results.Success;
+import ru.otus.example.grooming.gsclient.model.results.SuccessWithId;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -54,10 +57,10 @@ public class UserControllerService {
                 HttpMethod.POST,
                 new URI(uri)
         );
-        ResponseEntity<Long> response = restTemplate.exchange(request, Long.class);
-        Long userId = response.getBody();
+        ResponseEntity<SuccessWithId> response = restTemplate.exchange(request, SuccessWithId.class);
+        Long userId = response.getBody().getId();
 
-        clientService.createClient(userId);
+        clientService.createClient(userId, userDto.getLogin());
     }
 
     public void updateClient(ClientDto clientDto) {

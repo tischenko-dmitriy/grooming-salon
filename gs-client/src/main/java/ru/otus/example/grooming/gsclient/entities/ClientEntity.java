@@ -34,7 +34,9 @@ public class ClientEntity {
     @Column(name = "address_")
     private String address;
 
-    public ClientEntity(Long userId) {
+    public ClientEntity(Long userId, String name, String phone) {
         this.userId = userId;
+        this.name = name;
+        this.phone = phone;
     }
 }

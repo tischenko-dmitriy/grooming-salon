@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.example.grooming.gsadmin.model.dto.SimpleDto;
 import ru.otus.example.grooming.gsadmin.model.dto.UserDto;
 import ru.otus.example.grooming.gsadmin.model.results.Success;
+import ru.otus.example.grooming.gsadmin.model.results.SuccessWithId;
 import ru.otus.example.grooming.gsadmin.services.UserControllerService;
 
 import java.io.IOException;
@@ -41,8 +42,8 @@ public class UserController {
     @PostMapping(value = "/create",
             consumes = "application/json; charset=utf-8",
             produces = "application/json; charset=utf-8")
-    public ResponseEntity<Success> createUser(@RequestBody UserDto userData) {
-        userControllerService.createUser(userData);
-        return new ResponseEntity<>(new Success(true), HttpStatus.OK);
+    public ResponseEntity<SuccessWithId> createUser(@RequestBody UserDto userData) {
+        Long id = userControllerService.createUser(userData);
+        return new ResponseEntity<>(new SuccessWithId(true, id), HttpStatus.OK);
     }
 }

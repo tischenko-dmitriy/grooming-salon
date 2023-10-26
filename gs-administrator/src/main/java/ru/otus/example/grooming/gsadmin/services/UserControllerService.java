@@ -52,15 +52,17 @@ public class UserControllerService {
         return writer.toString();
     }
 
-    public void createUser(UserDto userData) {
+    public Long createUser(UserDto userData) {
         try {
-            userRepository.save(toUser(userData));
+            UserEntity userEntity = toUserEntity(userData);
+            userRepository.save(userEntity);
+            return userEntity.getId();
         } catch (Exception e) {
             throw new CrudOperationException(e.getClass().getName(), e.getMessage());
         }
     }
 
-    private UserEntity toUser(UserDto userData) {
+    private UserEntity toUserEntity(UserDto userData) {
 
         UserRoleEntity userRoleEntity =
                 userRoleRepository.findByName(userData.getRole())
