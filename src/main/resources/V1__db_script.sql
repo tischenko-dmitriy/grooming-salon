@@ -53,13 +53,13 @@ create table tb_client_adresses (
 /* **************************************************************************
  *  
  */
-create table tb_pet_kinds (
+create table tb_pet_kind_ref (
     id_ bigserial not null primary key,
     name_ varchar(128)
 );
 
-insert into tb_pet_kinds (name_) values ('Кошка');
-insert into tb_pet_kinds (name_) values ('Собака');
+insert into tb_pet_kind_ref (name_) values ('Кошка');
+insert into tb_pet_kind_ref (name_) values ('Собака');
 commit;
 
 /* **************************************************************************
@@ -69,10 +69,11 @@ create table tb_pets (
     id_ bigserial not null primary key,
     name_ varchar(255),
     client_id_ int not null,
-    pet_kind_id_ int not null,
-    foreign key (client_id_) references tb_clients(id_),
-    foreign key (pet_kind_id_) references tb_pet_kinds(id_)
+    pet_kind_id_ int not null
 );
+
+alter table tb_pets add foreign key (client_id_) references tb_clients(id_);
+alter table tb_pets add foreign key(pet_kind_id_) references tb_pet_kind_ref(id_);
 
 /* **************************************************************************
  *  
@@ -82,12 +83,11 @@ create table tb_services (
     pet_kind_id_ int not null,
     name_ varchar(255),
     timing_minutes_ int not null,
-    price_ money not null,
-    foreign key (pet_kind_id_) references tb_pet_kinds(id_)
+    price_ money not null
 );
 
-alter table tb_services
-    add constraint un_services_pet_kind_id_name unique (pet_kind_id_, name_);
+alter table tb_services add foreign key (pet_kind_id_) references tb_pet_kind_ref(id_);
+alter table tb_services add constraint un_services_pet_kind_id_name unique (pet_kind_id_, name_);
 
 /* **************************************************************************
  *  
@@ -166,3 +166,31 @@ create table tb_ordered_services (
     foreign key (order_id_) references tb_orders(id_),
     foreign key (service_id_) references tb_services(id_)
 );
+
+/* **************************************************************************
+ *  
+ */
+create table tb_client_feedbacks (
+    id_ bigserial not null primary key,
+    client_id_ integer not null,
+    date_ date not null default current_date,
+    feedback_ text,
+    rate_ int default 5 not null
+);
+
+alter table tb_client_feedbacks add foreign key (client_id_) references tb_clients(id_);
+alter table tb_client_feedbacks add check (rate_ between 1 and 5);
+
+/* **************************************************************************
+ *  
+ */
+create table tb_master_feedbacks (
+    id_ bigserial not null primary key,
+    master_id_ integer not null,
+    date_ date not null default current_date,
+    feedback_ text,
+    rate_ int default 5 not null
+);
+
+alter table tb_master_feedbacks add foreign key (master_id_) references tb_masters(id_);
+alter table tb_master_feedbacks add check (rate_ between 1 and 5);
