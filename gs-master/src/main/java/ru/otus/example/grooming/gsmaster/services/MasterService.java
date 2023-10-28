@@ -20,4 +20,5 @@ public class MasterService {
         masterRepository.save(masterEntity);
     }
 
+
 }

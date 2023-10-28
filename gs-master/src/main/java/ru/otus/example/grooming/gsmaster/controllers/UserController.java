@@ -3,15 +3,16 @@ package ru.otus.example.grooming.gsmaster.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.example.grooming.gsmaster.model.dto.MasterDto;
+import ru.otus.example.grooming.gsmaster.model.dto.ScheduleDto;
 import ru.otus.example.grooming.gsmaster.model.dto.UserDto;
 import ru.otus.example.grooming.gsmaster.services.UserControllerService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 @RestController
-@RequestMapping(value = "/grooming/client/user")
+@RequestMapping(value = "/grooming/master")
 public class UserController {
 
     private final UserControllerService userControllerService;
@@ -20,20 +21,20 @@ public class UserController {
         this.userControllerService = userControllerService;
     }
 
-    @GetMapping(value = "/role/list",
-        produces = "application/json; charset = UTF-8")
-    @ResponseBody
-    public ResponseEntity<String> getUserRoles(HttpServletRequest httpServletRequest) throws URISyntaxException {
-        String result = userControllerService.getUserRoleList(httpServletRequest.getHeader("Authorization"));
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
     @PostMapping(value = "/create")
-    public ResponseEntity<Void> createClientUser(@RequestBody UserDto userDto,
-                                                 HttpServletRequest httpServletRequest) throws URISyntaxException {
+    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto,
+                                           HttpServletRequest httpServletRequest) throws URISyntaxException {
         String autorization = httpServletRequest.getHeader("Authorization");
         userControllerService.createMasterUser(userDto, autorization);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{masterId}/schedule")
+    public ResponseEntity<ScheduleDto> getSchedule(@PathVariable(value = "masterId") Long masterId,
+                                                   @RequestParam(name = "scheduleDate") Date scheduleDate) {
+
+        ScheduleDto result = new ScheduleDto();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

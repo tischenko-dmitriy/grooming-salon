@@ -11,21 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping(value = "/grooming/client/user")
+@RequestMapping(value = "/grooming/client")
 public class UserController {
 
     private final UserControllerService userControllerService;
 
     public UserController(UserControllerService userControllerService) {
         this.userControllerService = userControllerService;
-    }
-
-    @GetMapping(value = "/role/list",
-        produces = "application/json; charset = UTF-8")
-    @ResponseBody
-    public ResponseEntity<String> getUserRoles(HttpServletRequest httpServletRequest) throws URISyntaxException {
-        String result = userControllerService.getUserRoleList(httpServletRequest.getHeader("Authorization"));
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping(value = "/create")
