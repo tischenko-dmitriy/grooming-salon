@@ -3,7 +3,6 @@ package ru.otus.example.grooming.gsmaster.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.example.grooming.gsmaster.entities.MasterEntity;
-import ru.otus.example.grooming.gsmaster.model.dto.MasterDto;
 import ru.otus.example.grooming.gsmaster.repositories.MasterRepository;
 
 @Service
