@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -27,7 +28,7 @@ public class ScheduleEntity {
     @JsonProperty(value = "scheduleDate")
     @Column(name = "date_")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-    private Date date;
+    private LocalDate date;
 
     @JsonProperty(value = "masterId")
     @Column(name = "master_id_")
@@ -36,11 +37,11 @@ public class ScheduleEntity {
     @JsonProperty(value = "startTime")
     @Column(name = "start_time_")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "hh:mm")
-    private Date startTime;
+    private LocalTime startTime;
 
     @JsonProperty(value = "endTime")
     @Column(name = "end_time_")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "hh:mm")
-    private Date endTime;
+    private LocalTime endTime;
 
 }

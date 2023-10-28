@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping(value = "/{masterId}/schedule")
     public ResponseEntity<ScheduleDto> getSchedule(@PathVariable(value = "masterId") Long masterId,
-                                                   @RequestParam(name = "scheduleDate") Date scheduleDate) {
+                                                   @RequestParam(name = "date") Date date) {
 
         ScheduleDto result = new ScheduleDto();
         return new ResponseEntity<>(result, HttpStatus.OK);
