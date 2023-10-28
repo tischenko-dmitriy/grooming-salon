@@ -12,6 +12,7 @@
     <modules>
         <module>gs-client</module>
         <module>gs-administrator</module>
+        <module>gs-master</module>
     </modules>
 
     <parent>
