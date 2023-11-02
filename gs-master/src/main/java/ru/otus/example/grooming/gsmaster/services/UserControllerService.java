@@ -46,14 +46,12 @@ public class UserControllerService {
         return response.getBody();
     }
 
-    public void createMasterUser(UserDto userDto, String authorization) throws URISyntaxException {
+    public void createMasterUser(UserDto userDto, HttpHeaders httpHeaders) throws URISyntaxException {
         String uri = String.format("%s%s", adminAppUrl, createUserUri);
         userDto.setRole(Constants.MASTER_USER_ROLE_NAME);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", authorization);
         RequestEntity<UserDto> request = new RequestEntity<>(
                 userDto,
-                headers,
+                httpHeaders,
                 HttpMethod.POST,
                 new URI(uri)
         );

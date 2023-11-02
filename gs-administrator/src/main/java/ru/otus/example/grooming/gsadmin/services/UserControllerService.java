@@ -1,6 +1,5 @@
 package ru.otus.example.grooming.gsadmin.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,7 +8,6 @@ import ru.otus.example.grooming.gsadmin.entities.UserEntity;
 import ru.otus.example.grooming.gsadmin.entities.UserRoleEntity;
 import ru.otus.example.grooming.gsadmin.exceptions.CrudOperationException;
 import ru.otus.example.grooming.gsadmin.exceptions.UserRoleNotFoundException;
-import ru.otus.example.grooming.gsadmin.model.dto.SimpleDto;
 import ru.otus.example.grooming.gsadmin.model.dto.UserDto;
 import ru.otus.example.grooming.gsadmin.repositories.UserRepository;
 import ru.otus.example.grooming.gsadmin.repositories.UserRoleRepository;

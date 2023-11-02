@@ -42,8 +42,8 @@ public class GeneralControllerTest {
     @Test
     public void doTestApplication() throws Exception {
         //given
-        String uri = "/grooming/client/test";
-        String appName = "{\"programName\":\"gs-client\"}";
+        String uri = "/grooming/master/test";
+        String appName = "{\"programName\":\"gs-master\"}";
 
         when(generalControllerService.testApplication())
                 .thenReturn(appName);

@@ -1,5 +1,6 @@
 package ru.otus.example.grooming.gsclient.configuration;
 
 public class Constants {
-    public static Integer CLIENT_USER_ROLE_ID = 1;
+    public static final String APPLICATION_USER_TYPE = "client";
+    public static final String CLIENT_USER_ROLE_NAME = "Клиент";
 }
