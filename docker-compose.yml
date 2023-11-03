@@ -1,0 +1,46 @@
+version: '3.2'
+ 
+services:
+    db_postgres:
+        image: postgres:14-alpine
+        container_name: gs-postgres14
+        ports:
+            - "5430:5430"
+        networks:
+            gs-stack-net:
+                ipv4_address: 172.19.0.2
+                
+    gs-admin:
+        image: gs-administrator
+        container_name: gs-admin
+        ports:
+            - "8082:8082"
+        networks:
+            gs-stack-net:
+                ipv4_address: 172.19.0.3
+            
+    gs-client:
+        image: gs-client
+        container_name: gs-client
+        ports:
+            - "8081:8081"
+        networks:
+            gs-stack-net:
+                ipv4_address: 172.19.0.4
+
+    gs-master:
+        image: gs-master
+        container_name: gs-master
+        ports:
+            - "8083:8083"
+        networks:
+            gs-stack-net:
+                ipv4_address: 172.19.0.5
+ 
+networks:
+    gs-stack-net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.19.0.0/16
+                
