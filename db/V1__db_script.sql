@@ -134,7 +134,7 @@ create table tb_schedules (
 );
 
 alter table tb_schedules
-    add constraint un_schedules_master_id_start_time_end_time unique(master_id_, start_time_, end_time_);
+    add constraint un_schedules_master_id_date_start_time_end_time unique(date_, master_id_, start_time_, end_time_);
     
 /* **************************************************************************
  *  
