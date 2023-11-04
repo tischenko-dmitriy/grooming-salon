@@ -47,12 +47,15 @@ public class IncomingRequestLogging implements Filter {
                                                ContentCachingRequestWrapper contentCachingRequestWrapper,
                                                ContentCachingResponseWrapper contentCachingResponseWrapper) {
         final String LOG_TEMPLATE =
-                "START-AT: %s;TRANSACT-ID: %s;SOURCE-APP: %s;REQUEST-METHOD: %s;URI: %s;REQUEST-BODY: %s;RESPONSE-STATUS: %s;RESPONSE-BODY: %s;WORK-TIME: %s";
+                "START-AT: %s;TRANSACT-ID: %s;SOURCE-APP: %s;ACTION: %s;REQUEST-METHOD: %s;URI: %s;REQUEST-BODY: %s;" +
+                        "RESPONSE-STATUS: %s;RESPONSE-BODY: %s;WORK-TIME: %s";
 
         String transactId = contentCachingResponseWrapper.getHeader("Transact-Id");
         transactId = Objects.isNull(transactId) ? "-" : transactId;
         String sourceApp = contentCachingResponseWrapper.getHeader("Source-App");
         sourceApp = Objects.nonNull(sourceApp) ? sourceApp : "-";
+        String action = contentCachingResponseWrapper.getHeader("Action");
+        action = Objects.nonNull(action) ? action : "-";
 
         String requestURI =
                 contentCachingRequestWrapper.getRequestURI() +
@@ -68,6 +71,7 @@ public class IncomingRequestLogging implements Filter {
                 simpleDateFormat.format(startDate),
                 transactId,
                 sourceApp,
+                action,
                 contentCachingRequestWrapper.getMethod(),
                 requestURI,
                 requestBody,

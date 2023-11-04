@@ -40,4 +40,13 @@ public class ApiExceptionHandler {
         return new SuccessWithError(false, new Error(code, type, message));
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public SuccessWithError handleUserNotFoundException(UserNotFoundException e) {
+        int code = 40101;
+        String type = "AUTHORIZATION_ERROR";
+        String message = e.getMessage();
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
 }

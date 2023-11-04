@@ -1,11 +1,15 @@
+/* **************************************************************************
+ *
+ */
+create sequence hibernate_sequence start 101;
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_user_roles (
     id_ bigserial not null primary key,
     name_ varchar(32),
-    is_admin_ bool default false not null 
+    is_admin_ bool default false not null
 );
 
 insert into tb_user_roles (name_) values ('Клиент');
@@ -15,7 +19,7 @@ commit;
 
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_users (
     id_ bigserial not null primary key,
@@ -26,8 +30,11 @@ create table tb_users (
     foreign key (user_role_id_) references tb_user_roles(id_)
 );
 
+insert into tb_users (user_role_id_, login_, password_, enabled_) values (3, 'admin', '$2y$10$jpEZu2Pd66GVlTaBad.F9O7zXyoECTKcVVC5HtiY8p4Z7nBhvfDNG', true);
+commit;
+
 /* **************************************************************************
- *  
+ *
  */
 create table tb_clients (
     id_ bigserial not null primary key,
@@ -40,7 +47,7 @@ create table tb_clients (
 );
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_client_adresses (
     id_ bigserial not null primary key,
@@ -51,7 +58,7 @@ create table tb_client_adresses (
 
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_pet_kind_ref (
     id_ bigserial not null primary key,
@@ -63,7 +70,7 @@ insert into tb_pet_kind_ref (name_) values ('Собака');
 commit;
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_pets (
     id_ bigserial not null primary key,
@@ -76,7 +83,7 @@ alter table tb_pets add foreign key (client_id_) references tb_clients(id_);
 alter table tb_pets add foreign key(pet_kind_id_) references tb_pet_kind_ref(id_);
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_services (
     id_ bigserial not null primary key,
@@ -90,7 +97,7 @@ alter table tb_services add foreign key (pet_kind_id_) references tb_pet_kind_re
 alter table tb_services add constraint un_services_pet_kind_id_name unique (pet_kind_id_, name_);
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_masters (
     id_ bigserial not null primary key,
@@ -103,7 +110,7 @@ create table tb_masters (
 
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_administrators (
     id_ bigserial not null primary key,
@@ -115,7 +122,7 @@ create table tb_administrators (
 );
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_schedules (
     id_ bigserial not null primary key,
@@ -128,9 +135,9 @@ create table tb_schedules (
 
 alter table tb_schedules
     add constraint un_schedules_master_id_start_time_end_time unique(master_id_, start_time_, end_time_);
-    
+
 /* **************************************************************************
- *  
+ *
  */
 create table tb_schedule_items (
     id_ bigserial not null primary key,
@@ -142,9 +149,9 @@ create table tb_schedule_items (
 
 alter table tb_schedule_items
     add constraint un_schedule_items_schedule_id_start_time unique(schedule_id_, start_time_);
-    
+
 /* **************************************************************************
- *  
+ *
  */
 create table tb_orders (
     id_ bigserial not null primary key,
@@ -157,7 +164,7 @@ create table tb_orders (
 );
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_ordered_services (
     id_ bigserial not null primary key,
@@ -168,7 +175,7 @@ create table tb_ordered_services (
 );
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_client_feedbacks (
     id_ bigserial not null primary key,
@@ -182,7 +189,7 @@ alter table tb_client_feedbacks add foreign key (client_id_) references tb_clien
 alter table tb_client_feedbacks add check (rate_ between 1 and 5);
 
 /* **************************************************************************
- *  
+ *
  */
 create table tb_master_feedbacks (
     id_ bigserial not null primary key,
@@ -231,6 +238,10 @@ create role "groom-master" with
     password 'GroomingSalon'
     connection limit -1;
 
+grant select, usage, update on sequence public.hibernate_sequence to "groom-admin";
+grant select, usage, update on sequence public.hibernate_sequence to "groom-client";
+grant select, usage, update on sequence public.hibernate_sequence to "groom-master";
+
 grant insert, update, select on table public.tb_administrators to "groom-admin";
 grant insert, update, select on table public.tb_client_adresses to "groom-admin";
 grant insert, update, select on table public.tb_client_feedbacks to "groom-admin";
@@ -273,8 +284,9 @@ grant insert, update, select on table public.tb_services to "groom-client";
 grant insert, update, select on table public.tb_users to "groom-client";
 grant insert, update, select on table public.tb_orders to "groom-client";
 
-grant insert, update, select on table public.tb_master_feedbacks to "groom-client";
-grant insert, update, select on table public.tb_masters to "groom-client";
-grant insert, update, select on table public.tb_orders to "groom-client";
-grant insert, update, select on table public.tb_schedule_items to "groom-client";
-grant insert, update, select on table public.tb_schedules to "groom-client";
+grant insert, update, select on table public.tb_master_feedbacks to "groom-master";
+grant insert, update, select on table public.tb_masters to "groom-master";
+grant insert, update, select on table public.tb_orders to "groom-master";
+grant insert, update, select on table public.tb_schedule_items to "groom-master";
+grant insert, update, select on table public.tb_schedules to "groom-master";
+grant insert, update, select on table public.tb_users to "groom-master";

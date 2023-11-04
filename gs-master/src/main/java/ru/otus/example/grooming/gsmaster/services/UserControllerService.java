@@ -7,11 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.otus.example.grooming.gsmaster.configuration.Constants;
 import ru.otus.example.grooming.gsmaster.model.dto.MasterDto;
+import ru.otus.example.grooming.gsmaster.model.dto.ScheduleDto;
 import ru.otus.example.grooming.gsmaster.model.dto.UserDto;
 import ru.otus.example.grooming.gsmaster.model.results.SuccessWithId;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 @Service
@@ -61,4 +64,8 @@ public class UserControllerService {
         masterService.createMaster(userId, userDto.getLogin());
     }
 
+    public ScheduleDto getSchedule(Long masterId, String scheduleDate) {
+        LocalDate date = LocalDate.parse(scheduleDate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return masterService.getSchedule(masterId, date);
+    }
 }

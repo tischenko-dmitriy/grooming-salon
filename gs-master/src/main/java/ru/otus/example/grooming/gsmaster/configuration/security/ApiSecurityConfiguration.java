@@ -32,7 +32,7 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .antMatcher("/grooming/client/**")
+                .antMatcher("/grooming/master/**")
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and().cors()

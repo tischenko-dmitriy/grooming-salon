@@ -30,23 +30,29 @@ public class UserController {
                                            HttpServletRequest httpServletRequest,
                                            HttpServletResponse httpServletResponse) throws URISyntaxException {
 
-        HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = addHeaders(httpServletResponse, "CreateMaster");
         headers.add("Authorization", httpServletRequest.getHeader("Authorization"));
-        headers.add("Transact-Id", UUID.randomUUID().toString());
-        headers.add("Source-App", Constants.APPLICATION_USER_TYPE);
-
-        headers.forEach((k, v) -> httpServletResponse.addHeader(k, String.join(";", v)));
-
         userControllerService.createMasterUser(userDto, headers);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/{masterId}/schedule")
     public ResponseEntity<ScheduleDto> getSchedule(@PathVariable(value = "masterId") Long masterId,
-                                                   @RequestParam(name = "date") Date date) {
+                                                   @RequestParam(name = "date") String date,
+                                                   HttpServletResponse httpServletResponse) {
 
-        ScheduleDto result = new ScheduleDto();
+        addHeaders(httpServletResponse, "GetSchedule");
+        ScheduleDto result = userControllerService.getSchedule(masterId, date);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    private HttpHeaders addHeaders(HttpServletResponse response, String actionName) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Transact-Id", UUID.randomUUID().toString());
+        headers.add("Source-App", Constants.APPLICATION_USER_TYPE);
+        headers.add("Action", actionName);
+        headers.forEach((k, v) -> response.addHeader(k, String.join(";", v)));
+        return headers;
     }
 
 }

@@ -54,15 +54,6 @@ public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-/*
-    @Bean
-    SecurityFilterChain configureFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .cors(Customizer.withDefaults());
-        return httpSecurity.build();
-    }
-*/
-
     @Bean
     CorsConfigurationSource corsConfigurationSource(@Value("${security.allowed-origins}") String allowedOrigins) {
         List<String> origins = Stream.of(allowedOrigins.split(",")).toList();

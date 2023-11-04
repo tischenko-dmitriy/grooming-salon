@@ -1,3 +1,7 @@
+/* **************************************************************************
+ *  
+ */
+create sequence hibernate_sequence start 101;
 
 /* **************************************************************************
  *  
@@ -25,6 +29,9 @@ create table tb_users (
     enabled_ boolean default true not null,
     foreign key (user_role_id_) references tb_user_roles(id_)
 );
+
+insert into tb_users (user_role_id_, login_, password_, enabled_) values (3, 'admin', '$2y$10$jpEZu2Pd66GVlTaBad.F9O7zXyoECTKcVVC5HtiY8p4Z7nBhvfDNG', true);
+commit;
 
 /* **************************************************************************
  *  
@@ -231,6 +238,10 @@ create role "groom-master" with
     password 'GroomingSalon'
     connection limit -1;
 
+grant select, usage, update on sequence public.hibernate_sequence to "groom-admin";
+grant select, usage, update on sequence public.hibernate_sequence to "groom-client";
+grant select, usage, update on sequence public.hibernate_sequence to "groom-master";
+
 grant insert, update, select on table public.tb_administrators to "groom-admin";
 grant insert, update, select on table public.tb_client_adresses to "groom-admin";
 grant insert, update, select on table public.tb_client_feedbacks to "groom-admin";
@@ -273,8 +284,9 @@ grant insert, update, select on table public.tb_services to "groom-client";
 grant insert, update, select on table public.tb_users to "groom-client";
 grant insert, update, select on table public.tb_orders to "groom-client";
 
-grant insert, update, select on table public.tb_master_feedbacks to "groom-client";
-grant insert, update, select on table public.tb_masters to "groom-client";
-grant insert, update, select on table public.tb_orders to "groom-client";
-grant insert, update, select on table public.tb_schedule_items to "groom-client";
-grant insert, update, select on table public.tb_schedules to "groom-client";
+grant insert, update, select on table public.tb_master_feedbacks to "groom-master";
+grant insert, update, select on table public.tb_masters to "groom-master";
+grant insert, update, select on table public.tb_orders to "groom-master";
+grant insert, update, select on table public.tb_schedule_items to "groom-master";
+grant insert, update, select on table public.tb_schedules to "groom-master";
+grant insert, update, select on table public.tb_users to "groom-master";
