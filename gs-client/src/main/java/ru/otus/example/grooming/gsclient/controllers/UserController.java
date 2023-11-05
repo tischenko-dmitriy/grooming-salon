@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.example.grooming.gsclient.configuration.Constants;
 import ru.otus.example.grooming.gsclient.model.dto.ClientDto;
 import ru.otus.example.grooming.gsclient.model.dto.PetDto;
+import ru.otus.example.grooming.gsclient.model.dto.ServiceDto;
 import ru.otus.example.grooming.gsclient.model.dto.UserDto;
 import ru.otus.example.grooming.gsclient.services.UserControllerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -63,6 +65,18 @@ public class UserController {
 
         userControllerService.createPet(petDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/list/services",
+            consumes = "application/json; charset = UTF-8",
+            produces = "application/json; charset = UTF-8")
+    @ResponseBody
+    public ResponseEntity<List<ServiceDto>> getServiceList(@RequestParam(name = "petKind", required = false) String petKindName,
+                                                           HttpServletResponse httpServletResponse) {
+        HttpHeaders headers = addHeaders(httpServletResponse, "GetServiceList");
+        List<ServiceDto> serviceDtos = userControllerService.getServiceList(petKindName);
+
+        return new ResponseEntity<>(serviceDtos, HttpStatus.OK);
     }
 
     private HttpHeaders addHeaders(HttpServletResponse response, String actionName) {

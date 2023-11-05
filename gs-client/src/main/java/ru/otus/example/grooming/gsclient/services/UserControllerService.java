@@ -8,11 +8,13 @@ import org.springframework.web.client.RestTemplate;
 import ru.otus.example.grooming.gsclient.configuration.Constants;
 import ru.otus.example.grooming.gsclient.model.dto.ClientDto;
 import ru.otus.example.grooming.gsclient.model.dto.PetDto;
+import ru.otus.example.grooming.gsclient.model.dto.ServiceDto;
 import ru.otus.example.grooming.gsclient.model.dto.UserDto;
 import ru.otus.example.grooming.gsclient.model.results.SuccessWithId;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Properties;
 
 @Service
@@ -53,5 +55,10 @@ public class UserControllerService {
 
     public void createPet(PetDto petDto) {
         clientService.createPet(petDto);
+    }
+
+    public List<ServiceDto> getServiceList(String petKindName) {
+        List<ServiceDto> serviceDtos = clientService.getServiceList(petKindName);
+        return serviceDtos;
     }
 }

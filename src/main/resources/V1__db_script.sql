@@ -96,6 +96,14 @@ create table tb_services (
 alter table tb_services add foreign key (pet_kind_id_) references tb_pet_kind_ref(id_);
 alter table tb_services add constraint un_services_pet_kind_id_name unique (pet_kind_id_, name_);
 
+insert into tb_services (pet_kind_id_, name_, timing_minutes_, price_) values (2, 'Стрижка', 90, 100);
+insert into tb_services (pet_kind_id_, name_, timing_minutes_, price_) values (2, 'Мытье', 30, 50);
+insert into tb_services (pet_kind_id_, name_, timing_minutes_, price_) values (2, 'Сушка', 30, 50);
+insert into tb_services (pet_kind_id_, name_, timing_minutes_, price_) values (1, 'Стрижка', 90, 100);
+insert into tb_services (pet_kind_id_, name_, timing_minutes_, price_) values (1, 'Мытье', 30, 50);
+insert into tb_services (pet_kind_id_, name_, timing_minutes_, price_) values (1, 'Сушка', 30, 50);
+commit;
+
 /* **************************************************************************
  *
  */
@@ -134,7 +142,7 @@ create table tb_schedules (
 );
 
 alter table tb_schedules
-    add constraint un_schedules_master_id_start_time_end_time unique(master_id_, start_time_, end_time_);
+    add constraint un_schedules_master_id_date_start_time_end_time unique(date_, master_id_, start_time_, end_time_);
 
 /* **************************************************************************
  *
