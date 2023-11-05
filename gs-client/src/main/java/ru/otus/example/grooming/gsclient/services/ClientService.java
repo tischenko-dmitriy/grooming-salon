@@ -1,7 +1,6 @@
 package ru.otus.example.grooming.gsclient.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import ru.otus.example.grooming.gsclient.entities.ClientEntity;
 import ru.otus.example.grooming.gsclient.entities.PetEntity;
@@ -55,7 +54,7 @@ public class ClientService {
     }
 
     public List<ServiceDto> getServiceList(String petKindName) {
-        List<ServiceEntity> serviceList = new ArrayList<>();
+        List<ServiceEntity> serviceList;
         if (Objects.nonNull(petKindName)) {
             PetKindRefEntity petKindRefEntity = petKindRefRepository.findByName(petKindName)
                     .orElseThrow(() -> new PetKindNotFoundException(petKindName));

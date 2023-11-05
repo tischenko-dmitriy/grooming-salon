@@ -167,6 +167,7 @@ create table tb_orders (
     schedule_item_id_ integer not null,
     pet_id_ integer not null,
     total_timing_minutes_ integer not null,
+	total_cost_ money not null,
     foreign key (schedule_item_id_) references tb_schedule_items(id_),
     foreign key (pet_id_) references tb_pets(id_)
 );
