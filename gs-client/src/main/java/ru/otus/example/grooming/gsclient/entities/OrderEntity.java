@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -23,7 +24,7 @@ public class OrderEntity {
     private LocalDate date;
 
     @Column(name = "schedule_item_id_")
-    private Long scheduleItemId;
+    private UUID scheduleItemId;
 
     @Column(name = "pet_id_")
     private Long petId;

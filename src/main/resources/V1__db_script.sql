@@ -148,10 +148,11 @@ alter table tb_schedules
  *
  */
 create table tb_schedule_items (
-    id_ bigserial not null primary key,
+    id_ uuid not null primary key,
     schedule_id_ integer not null,
+	client_id_ integer,
     start_time_ time not null,
-    timing_minutes_ integer,
+    busy_ boolean default false,
     foreign key (schedule_id_) references tb_schedules(id_)
 );
 
@@ -164,11 +165,10 @@ alter table tb_schedule_items
 create table tb_orders (
     id_ bigserial not null primary key,
     date_ date not null default current_date,
-    schedule_item_id_ integer not null,
+    schedule_item_id_ uuid not null,
     pet_id_ integer not null,
-    total_timing_minutes_ integer not null,
-	total_cost_ money not null,
-    foreign key (schedule_item_id_) references tb_schedule_items(id_),
+    total_timing_minutes_ integer,
+	total_cost_ money,
     foreign key (pet_id_) references tb_pets(id_)
 );
 

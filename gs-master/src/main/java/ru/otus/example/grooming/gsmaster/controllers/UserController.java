@@ -5,14 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.example.grooming.gsmaster.configuration.Constants;
-import ru.otus.example.grooming.gsmaster.model.dto.ScheduleDto;
 import ru.otus.example.grooming.gsmaster.model.dto.UserDto;
 import ru.otus.example.grooming.gsmaster.services.UserControllerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
-import java.util.Date;
 import java.util.UUID;
 
 @RestController
@@ -34,16 +32,6 @@ public class UserController {
         headers.add("Authorization", httpServletRequest.getHeader("Authorization"));
         userControllerService.createMasterUser(userDto, headers);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/{masterId}/schedule")
-    public ResponseEntity<ScheduleDto> getSchedule(@PathVariable(value = "masterId") Long masterId,
-                                                   @RequestParam(name = "date") String date,
-                                                   HttpServletResponse httpServletResponse) {
-
-        addHeaders(httpServletResponse, "GetSchedule");
-        ScheduleDto result = userControllerService.getSchedule(masterId, date);
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     private HttpHeaders addHeaders(HttpServletResponse response, String actionName) {

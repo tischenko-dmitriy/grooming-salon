@@ -11,6 +11,7 @@ import ru.otus.example.grooming.gsmaster.entities.MasterEntity;
 import ru.otus.example.grooming.gsmaster.entities.ScheduleEntity;
 import ru.otus.example.grooming.gsmaster.model.dto.ScheduleDto;
 import ru.otus.example.grooming.gsmaster.repositories.MasterRepository;
+import ru.otus.example.grooming.gsmaster.repositories.ScheduleItemRepository;
 import ru.otus.example.grooming.gsmaster.repositories.ScheduleRepository;
 
 import java.time.LocalDate;
@@ -27,6 +28,9 @@ public class MasterServiceTest {
     ScheduleRepository scheduleRepository;
 
     @Mock
+    ScheduleItemRepository scheduleItemRepository;
+
+    @Mock
     MasterRepository masterRepository;
 
     @Spy
@@ -35,7 +39,7 @@ public class MasterServiceTest {
 
     @BeforeEach
     public void init() {
-        masterService = new MasterService(masterRepository, scheduleRepository);
+        masterService = new MasterService(masterRepository, scheduleRepository, scheduleItemRepository);
     }
 
     @Test

@@ -6,15 +6,11 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.otus.example.grooming.gsmaster.configuration.Constants;
-import ru.otus.example.grooming.gsmaster.model.dto.MasterDto;
-import ru.otus.example.grooming.gsmaster.model.dto.ScheduleDto;
 import ru.otus.example.grooming.gsmaster.model.dto.UserDto;
 import ru.otus.example.grooming.gsmaster.model.results.SuccessWithId;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 @Service
@@ -24,8 +20,6 @@ public class UserControllerService {
     private final String adminAppUrl;
     private final String getUserRoleListUri;
     private final String createUserUri;
-    private final String adminUsername;
-    private final String adminPassword;
     private final RestTemplate restTemplate;
 
     @Autowired
@@ -34,8 +28,6 @@ public class UserControllerService {
         this.adminAppUrl = adminAppProperties.getProperty("adminAppUrl");
         this.getUserRoleListUri = adminAppProperties.getProperty("getUserRoleListUri");
         this.createUserUri = adminAppProperties.getProperty("createUserUri");
-        this.adminUsername = adminAppProperties.getProperty("adminUsername");
-        this.adminPassword = adminAppProperties.getProperty("adminPassword");
         this.masterService = masterService;
         this.restTemplate = new RestTemplate();
     }
@@ -64,8 +56,4 @@ public class UserControllerService {
         masterService.createMaster(userId, userDto.getLogin());
     }
 
-    public ScheduleDto getSchedule(Long masterId, String scheduleDate) {
-        LocalDate date = LocalDate.parse(scheduleDate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        return masterService.getSchedule(masterId, date);
-    }
 }

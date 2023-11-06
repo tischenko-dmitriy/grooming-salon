@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.example.grooming.gsclient.configuration.Constants;
+import ru.otus.example.grooming.gsclient.model.dto.NewOrderDto;
 import ru.otus.example.grooming.gsclient.model.dto.OrderDto;
 import ru.otus.example.grooming.gsclient.model.dto.ServiceDto;
 import ru.otus.example.grooming.gsclient.services.OrderControllerService;
@@ -26,11 +27,11 @@ public class OrderController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<String> createOrder(@RequestBody List<ServiceDto> services,
+    public ResponseEntity<String> createOrder(@RequestBody NewOrderDto newOrderDto,
                                               HttpServletResponse httpServletResponse) {
 
         HttpHeaders httpHeaders = addHeaders(httpServletResponse, "CreateOrder");
-        OrderDto orderDto = orderControllerService.createOrder(services);
+        OrderDto orderDto = orderControllerService.createOrder(newOrderDto);
         return new ResponseEntity<>(String.format("{\"orderNo\": %d}", orderDto.getOrder().getId()), HttpStatus.OK);
 
     }
