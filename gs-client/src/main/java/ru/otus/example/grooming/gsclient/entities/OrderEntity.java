@@ -32,4 +32,7 @@ public class OrderEntity {
     @Column(name = "total_timing_minutes_")
     private int totalTimingMinutes;
 
+    @Column(name = "total_cost_")
+    private double totalCost;
+
 }

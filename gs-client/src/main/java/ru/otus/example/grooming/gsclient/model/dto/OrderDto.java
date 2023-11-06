@@ -9,6 +9,7 @@ import lombok.Setter;
 import ru.otus.example.grooming.gsclient.entities.OrderEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -23,4 +24,6 @@ public class OrderDto {
     @JsonProperty(value = "services")
     private List<ServiceDto> services;
 
+    @JsonProperty(value = "startScheduleItemId")
+    private UUID startScheduleItemId;
 }

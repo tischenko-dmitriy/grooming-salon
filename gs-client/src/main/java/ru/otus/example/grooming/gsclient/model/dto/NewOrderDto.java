@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,5 +22,8 @@ public class NewOrderDto {
 
     @JsonProperty(value = "services")
     private List<ServiceDto> services;
+
+    @JsonProperty(value = "startScheduleItemId")
+    private UUID startScheduleItemId;
 
 }

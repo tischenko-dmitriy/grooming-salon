@@ -16,13 +16,16 @@ import ru.otus.example.grooming.gsmaster.repositories.ScheduleRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class MasterServiceTest {
+public class ScheduleServiceTest {
 
     @Mock
     ScheduleRepository scheduleRepository;
@@ -35,11 +38,11 @@ public class MasterServiceTest {
 
     @Spy
     @InjectMocks
-    MasterService masterService;
+    ScheduleService scheduleService;
 
     @BeforeEach
     public void init() {
-        masterService = new MasterService(masterRepository, scheduleRepository, scheduleItemRepository);
+        scheduleService = new ScheduleService(scheduleRepository, scheduleItemRepository, masterRepository);
     }
 
     @Test
@@ -51,6 +54,10 @@ public class MasterServiceTest {
         //given
         Long masterId = 102L;
         LocalDate date = LocalDate.of(2023, 11, 1);
+
+        List<UUID> scheduleItemIds = new ArrayList<>();
+        scheduleItemIds.add(UUID.randomUUID());
+        scheduleItemIds.add(UUID.randomUUID());
 
         MasterEntity master = new MasterEntity();
         master.setId(masterId);
@@ -69,6 +76,7 @@ public class MasterServiceTest {
         scheduleDto.setMasterId(102L);
         scheduleDto.setMasterName("sidorov");
         scheduleDto.setSchedule(scheduleEntity);
+        scheduleDto.setScheduleItems(scheduleItemIds);
 
         when(scheduleRepository.findByMasterIdAndDate(masterId, date))
                 .thenReturn(Optional.of(scheduleEntity));
@@ -76,10 +84,20 @@ public class MasterServiceTest {
                 .thenReturn(Optional.of(master));
 
         //when
-        ScheduleDto actualScheduleDto = masterService.getSchedule(masterId, date);
+        ScheduleDto actualScheduleDto = scheduleService.getSchedule(masterId, date);
 
         //then
         assertThat(actualScheduleDto.getMasterName()).isEqualTo(scheduleDto.getMasterName());
+
+    }
+
+    @Test
+    public void testSetBusy() {
+        //given
+        Long scheduleId = 1000L;
+        LocalTime time = LocalTime.of(9, 0);
+        int scheduleItemCount = 3;
+
 
     }
 }

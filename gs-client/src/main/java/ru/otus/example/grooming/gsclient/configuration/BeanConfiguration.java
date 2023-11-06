@@ -11,7 +11,7 @@ public class BeanConfiguration {
 
     @Bean("adminAppProperties")
     public Properties configureAdminAppProperties(@Value("${grooming.admin-app.url}") String adminAppUrl,
-                                                  @Value("${grooming.user-role-list.uri}") String getUserRoleListUri,
+                                                  @Value("${grooming.user.role-list.uri}") String getUserRoleListUri,
                                                   @Value("${grooming.user.create.uri}") String createUserUri) {
         Properties properties = new Properties();
         properties.put("adminAppUrl", adminAppUrl);
@@ -20,4 +20,12 @@ public class BeanConfiguration {
         return properties;
     }
 
+    @Bean("masterAppProperties")
+    public Properties configureMasterAppProperties(@Value("${grooming.master-app.url}") String masterAppUrl,
+                                                   @Value("${grooming.schedule.list.uri}") String scheduleListUri) {
+        Properties properties = new Properties();
+        properties.put("masterAppUrl", masterAppUrl);
+        properties.put("scheduleListUri", scheduleListUri);
+        return properties;
+    }
 }

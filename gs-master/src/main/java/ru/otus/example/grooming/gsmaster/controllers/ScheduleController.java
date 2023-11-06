@@ -33,6 +33,16 @@ public class ScheduleController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/schedule/{scheduleId}/set-busy")
+    public ResponseEntity<Void> setBusy(@PathVariable(value = "scheduleId") Long scheduleId,
+                                        @RequestParam(name = "startTime") String startTime,
+                                        @RequestParam(name = "itemCount") Integer itemCount,
+                                        HttpServletResponse httpServletResponse) {
+        HttpHeaders headers = addHeaders(httpServletResponse, "SetAsBusy");
+        scheduleControllerService.setBusy(scheduleId, startTime, itemCount);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     private HttpHeaders addHeaders(HttpServletResponse response, String actionName) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Transact-Id", UUID.randomUUID().toString());

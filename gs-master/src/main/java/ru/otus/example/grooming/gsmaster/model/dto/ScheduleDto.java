@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.otus.example.grooming.gsmaster.entities.ScheduleEntity;
+import ru.otus.example.grooming.gsmaster.entities.ScheduleItemEntity;
+
+import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -23,5 +27,8 @@ public class ScheduleDto {
 
     @JsonProperty(value = "schedule")
     private ScheduleEntity schedule;
+
+    @JsonProperty(value = "scheduleItems")
+    private List<UUID> scheduleItems;
 
 }
