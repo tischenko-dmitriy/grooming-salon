@@ -24,6 +24,6 @@ public class ScheduleControllerService {
     }
 
     public void setBusy(Long scheduleId, String startTime, Integer itemCount) {
-        sche
+        scheduleService.setBusy(scheduleId, startTime, itemCount);
     }
 }
