@@ -1,0 +1,52 @@
+package ru.otus.example.grooming.gsadmin.exceptions;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import ru.otus.example.grooming.gsadmin.model.results.SuccessWithError;
+import ru.otus.example.grooming.gsadmin.model.Error;
+
+import java.net.URISyntaxException;
+
+@RestControllerAdvice
+public class ApiExceptionHandler {
+
+    @ExceptionHandler(JsonProcessingException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public SuccessWithError handleJsonProcessingException(JsonProcessingException e) {
+        int code = 40001;
+        String type = "REQUEST_ERROR";
+        String message = e.getMessage();
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
+    @ExceptionHandler(URISyntaxException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public SuccessWithError handleURISyntaxException(URISyntaxException e) {
+        int code = 40002;
+        String type = "REQUEST_ERROR";
+        String message = e.getMessage();
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
+    @ExceptionHandler(CrudOperationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public SuccessWithError handleCrudOperationException(CrudOperationException e) {
+        int code = 50001;
+        String type = "DATABASE_OPERATION_ERROR";
+        String message = String.format("[%s] - %s", e.getClassName(), e.getMessage());
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public SuccessWithError handleUserNotFoundException(UserNotFoundException e) {
+        int code = 40101;
+        String type = "AUTHORIZATION_ERROR";
+        String message = e.getMessage();
+        return new SuccessWithError(false, new Error(code, type, message));
+    }
+
+}

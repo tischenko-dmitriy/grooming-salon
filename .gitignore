@@ -3,7 +3,13 @@
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/vcs.xml
-/srcdir.bat
+/.idea/jarRepositories.xml
 /.idea/compiler.xml
 /.idea/encodings.xml
-/.idea/jarRepositories.xml
+/.idea/uiDesigner.xml
+/gs-client/target/
+/execution/
+/workshop/
+/gs-administrator/target/
+/documentation/~$ooming-salon.docx
+/gs-master/target/
