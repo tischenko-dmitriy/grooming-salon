@@ -11,10 +11,14 @@ public class BeanConfiguration {
 
     @Bean("adminAppProperties")
     public Properties configureAdminAppProperties(@Value("${grooming.admin-app.url}") String adminAppUrl,
+                                                  @Value("${grooming.admin-app.username}") String adminUsername,
+                                                  @Value("${grooming.admin-app.password}") String adminPassword,
                                                   @Value("${grooming.user.role-list.uri}") String getUserRoleListUri,
                                                   @Value("${grooming.user.create.uri}") String createUserUri) {
         Properties properties = new Properties();
         properties.put("adminAppUrl", adminAppUrl);
+        properties.put("adminUsername", adminUsername);
+        properties.put("adminPassword", adminPassword);
         properties.put("getUserRoleListUri", getUserRoleListUri);
         properties.put("createUserUri", createUserUri);
         return properties;

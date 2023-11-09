@@ -22,6 +22,8 @@ public class UserControllerService {
 
     private final ClientService clientService;
     private final String adminAppUrl;
+    private final String adminUsername;
+    private final String adminPassword;
     private final String createUserUri;
     private final RestTemplate restTemplate;
 
@@ -30,6 +32,8 @@ public class UserControllerService {
                                  ClientService clientService) {
         this.adminAppUrl = adminAppProperties.getProperty("adminAppUrl");
         this.createUserUri = adminAppProperties.getProperty("createUserUri");
+        this.adminUsername = adminAppProperties.getProperty("adminUsername");
+        this.adminPassword = adminAppProperties.getProperty("adminPassword");
         this.clientService = clientService;
         this.restTemplate = new RestTemplate();
     }
