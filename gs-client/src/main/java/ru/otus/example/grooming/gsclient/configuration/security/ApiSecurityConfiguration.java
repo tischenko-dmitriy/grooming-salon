@@ -16,10 +16,10 @@ import ru.otus.example.grooming.gsclient.services.ApiUserDetailService;
 public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private ApiUserDetailService apiUserDetailService;
+    ApiUserDetailService apiUserDetailService;
 
     @Autowired
-    private ApiBasicAuthenticationEntryPoint apiAuthenticationEntryPoint;
+    ApiBasicAuthenticationEntryPoint apiAuthenticationEntryPoint;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

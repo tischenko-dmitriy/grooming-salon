@@ -13,3 +13,8 @@
 /gs-administrator/target/
 /documentation/~$ooming-salon.docx
 /gs-master/target/
+/documentation/.$otus-grooming-salon.drawio.bkp
+/gs-client/logs/gs-client/debug/debug-logger.log
+/gs-client/logs/gs-client/error/error-logger.log
+/gs-client/logs/gs-client/info/info-logger.log
+/gs-client/logs/gs-client/warn/warn-logger.log

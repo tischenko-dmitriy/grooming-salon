@@ -13,6 +13,7 @@ import ru.otus.example.grooming.gsclient.repositories.UserRepository;
 
 @Service
 public class ApiUserDetailService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Autowired
