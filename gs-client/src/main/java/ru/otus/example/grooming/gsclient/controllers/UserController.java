@@ -28,43 +28,40 @@ public class UserController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Void> createClientUser(@RequestBody UserDto userDto,
-                                                 HttpServletRequest httpServletRequest,
-                                                 HttpServletResponse httpServletResponse) throws URISyntaxException {
+    public void createClientUser(@RequestBody UserDto userDto,
+                                 HttpServletRequest httpServletRequest,
+                                 HttpServletResponse httpServletResponse) throws URISyntaxException {
 
         HttpHeaders httpHeaders = addHeaders(httpServletResponse, "CreateClient");
         httpHeaders.add("Authorization", httpServletRequest.getHeader("Authorization"));
         userControllerService.createClientUser(userDto, httpHeaders);
 
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = "/update",
         consumes = "application/json; charset = UTF-8",
         produces = "application/json; charset = UTF-8")
-    public ResponseEntity<Void> updateClient(@RequestBody ClientDto clientDto,
-                                             HttpServletRequest httpServletRequest,
-                                             HttpServletResponse httpServletResponse) {
+    public void updateClient(@RequestBody ClientDto clientDto,
+                             HttpServletRequest httpServletRequest,
+                             HttpServletResponse httpServletResponse) {
 
         HttpHeaders httpHeaders = addHeaders(httpServletResponse, "UpdateClient");
         httpHeaders.add("Authorization", httpServletRequest.getHeader("Authorization"));
         userControllerService.updateClient(clientDto);
 
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/{clientId}/pet/create",
             consumes = "application/json; charset = UTF-8",
             produces = "application/json; charset = UTF-8")
-    public ResponseEntity<Void> createPet(@RequestBody PetDto petDto,
-                                          HttpServletRequest httpServletRequest,
-                                          HttpServletResponse httpServletResponse) {
+    public void createPet(@RequestBody PetDto petDto,
+                          HttpServletRequest httpServletRequest,
+                          HttpServletResponse httpServletResponse) {
 
         HttpHeaders httpHeaders = addHeaders(httpServletResponse, "UpdateClient");
         httpHeaders.add("Authorization", httpServletRequest.getHeader("Authorization"));
-
         userControllerService.createPet(petDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
     @GetMapping(value = "/list/services",
